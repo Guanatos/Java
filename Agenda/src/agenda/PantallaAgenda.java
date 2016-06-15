@@ -5,18 +5,22 @@
  */
 package agenda;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author danunora
  */
 public class PantallaAgenda extends javax.swing.JFrame {
 
+    DefaultTableModel model;
     /**
      * Creates new form PantallaAgenda
      */
     public PantallaAgenda() {
         initComponents();
         DisableFields();
+        FillupTable();
     }
 
     // Disable Fields
@@ -32,6 +36,13 @@ public class PantallaAgenda extends javax.swing.JFrame {
         txtMobile.setEnabled(true);
         txtEmail.setEnabled(true);
         txtName.requestFocus();
+    }
+    
+    // fill up the titles of the table
+    void FillupTable(){
+        String[]titles = {"Name","Mobile","Email"};
+        model = new DefaultTableModel(null,titles);
+        jTable1.setModel(model);
     }
     /**
      * This method is called from within the constructor to initialize the form.
