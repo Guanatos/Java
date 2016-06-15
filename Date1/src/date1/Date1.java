@@ -21,19 +21,20 @@ public class Date1 {
 //        meetingDate.day = 14;
 //        meetingDate.month = 6;
 //        meetingDate.year = 2016;
-        meetingDate.day++;
+//        meetingDate.day++;
 
+        meetingDate.nextDay();
         System.out.println("Meeting will be: "
-        + meetingDate.day + "/"
-        + meetingDate.month + "/"
-        + meetingDate.year);
+        + meetingDate.getDay() + "/"
+        + meetingDate.getMonth() + "/"
+        + meetingDate.getYear());
         
         Date betterMeetingDate = new Date(29, 2, 2012);
         betterMeetingDate.nextDay();
-        System.out.println("Better meeting will be: "
-        + betterMeetingDate.day + "/"
-        + betterMeetingDate.month + "/"
-        + betterMeetingDate.year);
+        System.out.println("Better meeting will be: " + betterMeetingDate.toString());
+//        + betterMeetingDate.getDay() + "/"
+//        + betterMeetingDate.getMonth() + "/"
+//        + betterMeetingDate.getYear());
     }
     
 }

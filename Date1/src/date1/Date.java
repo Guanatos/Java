@@ -14,6 +14,11 @@ public class Date {
  private int month;
  private int year;
 
+ @Override
+ public String toString(){
+     return this.day + "/" + this.month + "/" + this.year;
+ }
+ 
     public int getDay() {
         return day;
     }
