@@ -7,11 +7,12 @@ import java.sql.Statement;
 
 public class sqlite3DB {
 
+    Connection conn = null;
+
     public sqlite3DB() {
     }
 
     public void openDB () {
-        Connection conn = null;
         try {
             String url = "jdbc:sqlite:/home/danunora/Develop/Java/GeekHub/geekhub.db";
             conn = DriverManager.getConnection(url);
@@ -30,16 +31,18 @@ public class sqlite3DB {
         }
     }
 
-/*
-    public boolean queryDB () {
+    public void queryDB (String query) {
         try {
             Statement statement = conn.createStatement();
+            statement.execute(query);
         } catch (SQLException e) {
+            System.out.println("query failed");
             System.out.format("%s", e.getMessage());
         }
 
     }
 
+/*
     public boolean closeDB () {
         try {
             Connection conn = DriverManager.();
