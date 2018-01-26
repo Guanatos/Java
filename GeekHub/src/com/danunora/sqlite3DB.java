@@ -20,14 +20,6 @@ public class sqlite3DB {
         } catch (SQLException e) {
             System.out.println("Connection failed");
             System.out.format("%s", e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                System.out.println(e.getMessage());;
-            }
         }
     }
 
@@ -35,12 +27,24 @@ public class sqlite3DB {
         try {
             Statement statement = conn.createStatement();
             statement.execute(query);
+            System.out.println("Query executed successfully");
         } catch (SQLException e) {
             System.out.println("query failed");
             System.out.format("%s", e.getMessage());
         }
 
     }
+
+    public void closeDB () {
+         try {
+             if (conn != null) {
+                 conn.close();
+             }
+         } catch (SQLException e) {
+             System.out.println(e.getMessage());;
+         }
+     }
+
 
 /*
     public boolean closeDB () {
