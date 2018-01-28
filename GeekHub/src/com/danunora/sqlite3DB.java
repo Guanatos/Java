@@ -1,22 +1,18 @@
 package com.danunora;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class sqlite3DB {
 
-    Connection conn = null;
+    private Connection conn = null;
 
     public sqlite3DB() {
     }
 
     public void openDB () {
         try {
-            String url = "jdbc:sqlite:/home/danunora/Develop/Java/GeekHub/geekhub.db";
-            conn = DriverManager.getConnection(url);
-            System.out.println("Connection successful");
+            conn = DriverManager.getConnection(Consts.DB_URL);
+            System.out.println("Connection opened successfully");
         } catch (SQLException e) {
             System.out.println("Connection failed");
             System.out.format("%s", e.getMessage());
@@ -26,36 +22,42 @@ public class sqlite3DB {
     public void queryDB (String query) {
         try {
             Statement statement = conn.createStatement();
-            statement.execute(query);
+            ResultSet results = statement.executeQuery(query);
+            while (results.next()){
+                System.out.println(results.getString("name") + " " +
+                                   results.getString("email") + " " +
+                                   results.getString("phone"));
+            }
+            statement.close();
             System.out.println("Query executed successfully");
         } catch (SQLException e) {
             System.out.println("query failed");
             System.out.format("%s", e.getMessage());
         }
+    }
 
+    public void insertDB (String query) {
+        try {
+            Statement statement = conn.createStatement();
+            statement.execute(query);
+            statement.close();
+            System.out.println("Query executed successfully");
+        } catch (SQLException e) {
+            System.out.println("query failed");
+            System.out.format("%s", e.getMessage());
+        }
     }
 
     public void closeDB () {
          try {
              if (conn != null) {
                  conn.close();
+                 System.out.println("Connection closed successfully");
              }
          } catch (SQLException e) {
-             System.out.println(e.getMessage());;
+             System.out.println("Connection failed to be closed");
+             System.out.println(e.getMessage());
          }
      }
 
-
-/*
-    public boolean closeDB () {
-        try {
-            Connection conn = DriverManager.();
-            return true;
-        } catch (SQLException e) {
-            System.out.format("%s",e.getMessage());
-            return false;
-        }
-    }
-
-*/
 }
